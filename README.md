@@ -4,7 +4,7 @@ An interactive edition of the inscription on the Shabaqo Stone (British Museum E
 surviving sign traced stroke by stroke on a high-resolution photograph of the stone, numbered after
 Rothöhler (2004), and compared with Breasted's hand copy of 1901.
 
-**Viewer:** <https://brezgis.github.io/shabaqo/>
+**Viewer:** <https://shabaqo.brezgis.com/>
 
 ![The viewer: the whole stone with the trace](docs/screenshots/overview.jpg)
 
