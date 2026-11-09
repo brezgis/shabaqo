@@ -30,9 +30,8 @@
 
   // the stone's own outline, segmented from the photo (scripts/fine_outline.py); optional
   const cutout = fetch("data/stone_cutout.json").then(r => r.ok ? r.json() : null).catch(() => null);
-  const shabaqo = t => t.replace(/Shabaka(?!_Stone|Stone)/g, "Shabaqo");
   const loadFailed = () => { const l = $("#loading"); l.classList.remove("done"); l.textContent = "The stone didn't load. Check the connection and reload the page."; };
-  Promise.all([fetch("data/stone.json").then(r => { if (!r.ok) throw r.status; return r.text(); }).then(t => JSON.parse(shabaqo(t))), cutout])
+  Promise.all([fetch("data/stone.json").then(r => { if (!r.ok) throw r.status; return r.text(); }).then(t => JSON.parse(t)), cutout])
     .then(([d, c]) => { if (c && c.length > 6) d.outline = c; init(d); }, loadFailed);
 
   function init(data) {
@@ -192,15 +191,20 @@
     vp.minZoomLevel = vp.getHomeZoom();
     vp.homeFillsViewer = saved;
   }
-  // The ink canvas is the view plus a margin of PAD view-widths on each side (snapped to whole device px;
-  // capped to stay under 16 Mpx, Safari's canvas limit). It is placed with a CSS transform, so while the view
-  // moves the compositor just moves and scales the last drawing (see render).
-  let VW = 0, VH = 0, MX = 0, MY = 0, cssW = 0, cssH = 0;
+  // The ink canvas is the view plus a margin of PAD view-widths on each side (snapped to whole device px).
+  // It stays under 16 Mpx, Safari's canvas limit: the margin shrinks first, and if the view alone is still
+  // too big (a 4K screen at 2x is 33 Mpx) the ink is drawn at a lower pixel ratio and the browser scales it
+  // up. It is placed with a CSS transform, so while the view moves the compositor just moves and scales the
+  // last drawing (see render).
+  const MAX_PX = 16e6;
+  let VW = 0, VH = 0, MX = 0, MY = 0, cssW = 0, cssH = 0, DPR = 1;
   function sizeCanvas() {
-    const r = $("#viewer").getBoundingClientRect(), dpr = window.devicePixelRatio || 1;
+    const r = $("#viewer").getBoundingClientRect();
+    DPR = Math.min(window.devicePixelRatio || 1, Math.sqrt(MAX_PX * 0.98 / Math.max(1, r.width * r.height)));
+    const dpr = DPR;
     cssW = r.width; cssH = r.height; VW = Math.round(r.width * dpr); VH = Math.round(r.height * dpr);
     let pad = PAD;
-    while (pad > 0 && (VW * (1 + 2 * pad)) * (VH * (1 + 2 * pad)) > 16e6) pad -= 0.05;
+    while (pad > 0 && (VW * (1 + 2 * pad)) * (VH * (1 + 2 * pad)) > MAX_PX) pad -= 0.05;
     pad = Math.max(0, pad);
     MX = Math.round(VW * pad); MY = Math.round(VH * pad);
     canvas.width = VW + 2 * MX; canvas.height = VH + 2 * MY;
@@ -241,7 +245,7 @@
                          VW, VH].join("|");
   function view() {
     const o = imgToEl(0, 0), q = imgToEl(1000, 0), sc = (q.x - o.x) / 1000;
-    const dpr = window.devicePixelRatio || 1, W = cssW, H = cssH;
+    const dpr = DPR, W = cssW, H = cssH;
     return { o, sc, dpr, W, H, x0: -o.x / sc, y0: -o.y / sc, x1: (W - o.x) / sc, y1: (H - o.y) / sc };
   }
   function newLayer(w, h, old) {
