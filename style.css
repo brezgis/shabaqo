@@ -1,0 +1,183 @@
+:root {
+  --wall: #24201c;        /* the gallery wall behind the cut-out stone */
+  --wall-deep: #1a1714;
+  --bone: #ebe3d3;
+  --ash: #968b7a;
+  --dust: #5f574c;
+  --hair: rgba(235, 227, 211, .12);
+  --ochre: #e2b964;       /* the page's accent: a warm glow around the stone */
+  /* the trace's colours (app.js COLORS), from Egyptian jewellery: cool against the warm stone */
+  --faience: #9fe2d0;     /* confirmed on the stone */
+  --carnelian: #f2937e;   /* corrected from Breasted */
+  --amethyst: #d7c2ff;    /* on the stone, missing from Breasted */
+  --slate: #8fa6b8;       /* Breasted drew it, the stone doesn't show it */
+  --gypsum: #f3eee4;      /* uncertain */
+  --card: rgba(24, 21, 18, .94);
+  --hiero: "Noto Sans Egyptian Hieroglyphs", serif;
+  --ui: "Alegreya", Georgia, serif;
+  --display: "Cormorant Garamond", Georgia, serif;
+  --translit: "Gentium Book Plus", "Alegreya", serif;
+  --backdrop: #24201c;    /* read by app.js for the cut-out */
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--wall); color: var(--bone); font-family: var(--ui); font-size: 15px; }
+body { overflow: hidden; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+:focus-visible { outline: 1.5px solid var(--ochre); outline-offset: 3px; border-radius: 3px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+main { position: fixed; inset: 0; overflow: hidden; }
+#viewer { position: absolute; inset: 0; background: var(--wall); }
+#ink { position: absolute; left: 0; top: 0; pointer-events: none; transform-origin: 0 0; will-change: transform; }
+#loading { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; font-style: italic; color: var(--ash);
+  pointer-events: none; transition: opacity .8s; }
+#loading.done { opacity: 0; }
+#caption { display: none; }
+
+/* ---------- top: name and the find box, floating on the wall ---------- */
+#top { position: absolute; top: 0; left: 0; right: 0; z-index: 5; display: flex; align-items: center; gap: 16px;
+  padding: 12px 20px; pointer-events: none;
+  background: linear-gradient(var(--wall) 55%, rgba(36, 32, 28, 0)); padding-bottom: 22px; }
+#top > * { pointer-events: auto; }
+h1 { margin: 0; font: 500 23px/1 var(--display); letter-spacing: .01em; color: var(--bone); display: flex; align-items: center; gap: 10px; }
+.ptah { font-family: var(--hiero); font-size: 24px; color: var(--ochre); transform: translateY(-1px); }
+.tools { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+#search { width: 250px; background: transparent; border: 0; border-bottom: 1px solid var(--hair); color: var(--bone);
+  padding: 5px 2px; font: italic 15px var(--ui); border-radius: 0; }
+#search::placeholder { color: var(--dust); }
+#search:focus { outline: none; border-bottom-color: var(--ochre); }
+#found { font-style: italic; color: var(--ash); font-size: 14px; white-space: nowrap; }
+#about-btn { color: var(--ash); font-style: italic; }
+#about-btn:hover { color: var(--bone); }
+
+/* ---------- bottom: the two lines of switches, and the map of columns ---------- */
+#foot { position: absolute; left: 0; right: 0; bottom: 0; z-index: 5; display: flex; align-items: flex-end; gap: 28px;
+  padding: 0 20px 12px; pointer-events: none;
+  background: linear-gradient(rgba(36, 32, 28, 0), var(--wall) 45%); }
+#foot > * { pointer-events: auto; }
+#controls { display: grid; gap: 3px; padding-bottom: 2px; }
+.row { display: flex; align-items: baseline; gap: 14px; white-space: nowrap; }
+.row .k { width: 30px; font-style: italic; color: var(--dust); font-size: 14px; }
+.row button { color: var(--ash); position: relative; padding: 2px 0; }
+.row button:hover { color: var(--bone); }
+.row button.on { color: var(--bone); }
+/* a brush-stroke of ochre under whatever is switched on */
+.row button.on::after { content: ""; position: absolute; left: -1px; right: -1px; bottom: 0; height: 2px; border-radius: 2px;
+  background: var(--ochre); opacity: .85; transform: rotate(-.6deg); }
+
+#ribbon { flex: 1; min-width: 0; max-width: 900px; margin-left: auto; position: relative; height: 62px; }
+#ribbon .line { position: absolute; top: 2px; height: 3px; border-radius: 2px; background: var(--ash); opacity: .55; cursor: pointer; }
+#ribbon .tick { position: absolute; bottom: 20px; width: 9px; margin-left: -4.5px; height: 34px; cursor: pointer; display: flex; align-items: flex-end; justify-content: center; }
+#ribbon .tick i { display: block; width: 3px; border-radius: 2px; background: var(--ash); opacity: .6; min-height: 2px; transition: background .15s, opacity .15s; }
+#ribbon .tick:hover i, #ribbon .line:hover { background: var(--bone); opacity: 1; }
+#ribbon .tick.on i, #ribbon .line.on { background: var(--ochre); opacity: 1; }
+#ribbon .tick.hit i { background: var(--carnelian); opacity: 1; }
+#ribbon .tick .n { position: absolute; bottom: 100%; font-size: 12px; white-space: nowrap; color: var(--bone); opacity: 0; transform: translateY(2px); transition: opacity .12s; pointer-events: none; }
+#ribbon .tick:hover .n, #ribbon .tick.on .n { opacity: 1; }
+#ribbon .sec { position: absolute; bottom: 0; font-size: 13px; font-style: italic; color: var(--dust); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  border-top: 1px solid var(--hair); padding-top: 2px; }
+#ribbon .sec.on { color: var(--ash); }
+/* a name too long for its stretch of stone shows only while you're on one of its columns */
+#ribbon .sec.tight { color: transparent; }
+#ribbon .sec.tight.on, #ribbon .sec.tight.peek { color: var(--ash); overflow: visible; z-index: 1; }
+#ribbon .sec.flip { display: flex; justify-content: flex-end; }
+#ribbon .sec.flip.tight.on > span, #ribbon .sec.flip.tight.peek > span { padding: 0 0 0 6px; }
+#ribbon .sec.tight.peek > span, #ribbon .sec.tight.on > span { background: var(--wall); padding-right: 6px; }
+
+#hint { position: absolute; left: 50%; bottom: 92px; transform: translateX(-50%); z-index: 4; margin: 0;
+  font-style: italic; color: var(--ash); background: rgba(26, 23, 20, .8); padding: 6px 14px; border-radius: 20px;
+  transition: opacity .6s; white-space: nowrap; }
+#hint.gone { opacity: 0; }
+
+/* ---------- the label that follows the pointer ---------- */
+#tip { position: absolute; z-index: 6; pointer-events: none; max-width: 300px;
+  background: var(--card); border-radius: 3px; padding: 11px 14px 12px; box-shadow: 0 10px 30px rgba(0, 0, 0, .45);
+  border-left: 3px solid var(--pig, var(--ochre)); }
+#tip .glyphrow { display: flex; gap: 14px; align-items: center; }
+#tip .glyph { font-family: var(--hiero); font-size: 42px; line-height: 1; color: var(--bone); min-width: 46px; text-align: center; }
+#tip dl { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; margin: 0; font-size: 13.5px; line-height: 1.35; }
+#tip dt { color: var(--dust); font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em; padding-top: 2px; }
+#tip dd { margin: 0; }
+#tip .dim { color: var(--ash); }
+#tip .tag { display: inline-flex; align-items: center; gap: 6px; }
+#tip .tag::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--pig); }
+#tip .word { margin-top: 8px; padding-top: 7px; border-top: 1px solid var(--hair); font-size: 14px; }
+#tip .tr { font-family: var(--translit); font-style: italic; font-size: 15.5px; }
+#tip .gl { color: var(--ash); }
+.ph { display: inline-block; width: .62em; height: .9em; border: 1px dashed var(--dust); border-radius: 2px; vertical-align: -.1em; margin: 0 .08em; }
+
+/* ---------- a column, opened ---------- */
+#panel { position: absolute; top: 0; right: 0; bottom: 0; width: min(420px, 100%); z-index: 7; overflow-y: auto;
+  background: var(--wall-deep); box-shadow: -18px 0 40px rgba(0, 0, 0, .3); padding: 22px 24px 40px; }
+#panel .close, dialog .close { position: absolute; top: 12px; right: 16px; font-size: 26px; line-height: 1; color: var(--ash); }
+#panel .close:hover, dialog .close:hover { color: var(--bone); }
+#panel h2 { font: 500 34px/1.1 var(--display); margin: 2px 0 0; }
+#panel .wgrid { margin-top: 18px; border-top: 1px solid var(--hair); }
+#panel .wr { display: grid; grid-template-columns: 38% 26% 1fr; border-bottom: 1px solid var(--hair); cursor: pointer; }
+#panel .wr > div { padding: 6px 8px; min-width: 0; }
+#panel .wr > div + div { border-left: 1px solid var(--hair); }
+#panel .wr:hover { background: rgba(226, 185, 100, .07); }
+#panel .wr .h { font-family: var(--hiero); font-size: 24px; line-height: 1.3; display: flex; flex-wrap: wrap; gap: 0 3px; align-items: center; }
+#panel .wr .h span { border-radius: 2px; }
+#panel .wr .h span:hover { background: rgba(226, 185, 100, .18); }
+#panel .wr .t { font-family: var(--translit); font-style: italic; font-size: 15px; color: var(--ochre); align-self: center; overflow-wrap: anywhere; }
+#panel .wr .g { font-size: 14px; color: var(--ash); align-self: center; }
+#panel .wr .t, #panel .wr .g { display: flex; align-items: center; }
+#panel .wr.loose .h { color: var(--ash); }
+#panel .wr .st-not_visible { opacity: .45; }
+#panel .nav { display: flex; justify-content: space-between; margin-top: 28px; }
+#panel .nav button { color: var(--ash); font-style: italic; }
+#panel .nav button:hover:not(:disabled) { color: var(--ochre); }
+#panel .nav button:disabled { visibility: hidden; }
+.pig { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: 1px; }
+
+/* ---------- about ---------- */
+dialog#about { background: var(--wall-deep); color: var(--bone); border: 0; border-radius: 4px; max-width: 640px; width: calc(100% - 32px);
+  max-height: calc(100% - 48px); padding: 30px 34px; box-shadow: 0 30px 80px rgba(0, 0, 0, .6); line-height: 1.6; }
+dialog#about::backdrop { background: rgba(10, 9, 8, .6); }
+dialog#about h2 { font: 500 34px/1.1 var(--display); margin: 0 0 14px; }
+dialog#about h3 { font: italic 400 15px var(--ui); color: var(--ash); margin: 22px 0 4px; }
+dialog#about p, dialog#about li { font-size: 16px; }
+dialog#about a { color: var(--ochre); }
+dialog#about details { margin-top: 18px; }
+dialog#about summary { cursor: pointer; font-style: italic; color: var(--ash); }
+.legend { display: grid; grid-template-columns: auto 1fr; gap: 4px 10px; align-items: baseline; }
+.legend .pig { margin: 0; }
+
+
+@media (max-width: 860px) {
+  #top { padding: 10px 14px 18px; gap: 12px; }
+  h1 { font-size: 20px; }
+  #search { width: 200px; }
+  #found { display: none; }
+  #foot { flex-direction: column; align-items: stretch; gap: 8px; padding: 0 14px 10px; }
+  #controls { overflow-x: auto; scrollbar-width: none; }
+  #ribbon { margin: 0; width: 100%; flex: none; height: 56px; }
+  .row { gap: 12px; }
+  #panel { top: 42%; width: 100%; box-shadow: 0 -18px 40px rgba(0, 0, 0, .35); }
+  #hint { bottom: 150px; white-space: normal; width: max-content; max-width: calc(100% - 32px); text-align: center; }
+}
+@media (max-width: 600px) {
+  #top { flex-wrap: wrap; gap: 6px 12px; }
+  .tools { width: 100%; margin: 0; }
+  #search { flex: 1; width: auto; min-width: 0; }
+  /* too narrow for a row of names: show only the section you're in */
+  #ribbon .sec:not(.on):not(.peek) { visibility: hidden; }
+  #ribbon .sec { overflow: visible; color: var(--ash); }
+}
+/* tall phone screens: the wide stone leaves wall to spare, so give it a museum label */
+@media (max-width: 600px) and (max-aspect-ratio: 3/4) {
+  #caption { display: block; margin: 0 0 10px; font-style: italic; color: var(--ash); line-height: 1.45; font-size: 15px; max-width: 34em; }
+  body.panel-open #caption { display: none; }
+  #hint { bottom: auto; top: 26%; }
+}
+/* short landscape screens: both switch rows on one line */
+@media (max-height: 520px) and (min-width: 601px) {
+  #top { padding-bottom: 12px; }
+  #controls { display: flex; gap: 22px; }
+  #ribbon { height: 46px; }
+  #ribbon .tick { height: 24px; }
+  #hint { bottom: auto; top: 22%; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

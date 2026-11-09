@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Shabaqo Stone</title>
+<meta name="description" content="The Shabaqo Stone, traced sign by sign: the Memphite Theology on its 2,700-year-old slab.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2324201c'/%3E%3Cg fill='none' stroke='%23e2b964' stroke-width='3' stroke-linecap='round'%3E%3Cellipse cx='16' cy='9.5' rx='4.6' ry='5.5'/%3E%3Cpath d='M16 15v13M8 16.5h16'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:ital@0;1&family=Cormorant+Garamond:wght@500&family=Gentium+Book+Plus:ital@1&family=Noto+Sans+Egyptian+Hieroglyphs&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <div id="viewer"></div>
+  <canvas id="ink"></canvas>
+  <p id="loading">Bringing the stone out of storage…</p>
+
+  <header id="top">
+    <h1><span class="ptah" aria-hidden="true">𓁰</span>The Shabaqo Stone</h1>
+    <div class="tools">
+      <label class="find"><span class="sr">Find a word</span>
+        <input id="search" type="search" placeholder="find a word: Ptah, heart, Horus…" autocomplete="off" spellcheck="false"></label>
+      <span id="found" aria-live="polite"></span>
+      <button id="about-btn">about</button>
+    </div>
+  </header>
+
+  <div id="tip" hidden></div>
+  <p id="hint" hidden>Hover over a sign to identify it; click to open its column.</p>
+
+  <aside id="panel" hidden>
+    <button class="close" aria-label="Close the column">×</button>
+    <div id="panel-body"></div>
+  </aside>
+
+  <footer id="foot">
+    <p id="caption">Inscribed for Shabaqo around 710 BC.</p>
+    <div id="controls">
+      <div class="row" id="overlays" role="group" aria-label="What to show">
+        <button data-ov="trace" class="on" title="The carved strokes, traced sign by sign (T)">trace</button>
+        <button data-ov="glyphs" title="Typeset form of each sign (G)">signs</button>
+        <button data-ov="breasted" title="Breasted's hand copy of 1901 (B)">Breasted 1901</button>
+        <button data-ov="roth" title="Rothöhler's copy of 2004 (R)">Rothöhler 2004</button>
+      </div>
+    </div>
+    <nav id="ribbon" aria-label="Columns, as they sit on the stone"></nav>
+  </footer>
+</main>
+
+<dialog id="about">
+  <button class="close" aria-label="Close" onclick="this.closest('dialog').close()">×</button>
+  <div class="about-body"></div>
+</dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/openseadragon/4.1.0/openseadragon.min.js" defer></script>
+<script src="app.js" defer></script>
+</body>
+</html>
