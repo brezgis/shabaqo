@@ -24,7 +24,7 @@ lines 1–2 and columns 3–64 (columns 48–52 are a single unit). Every sign i
 
 | Outcome | Signs |
 |---|---:|
-| Traced on the stone (4,356 strokes) | 1,892 |
+| Traced on the stone (4,362 strokes) | 1,892 |
 | Recorded as empty (surface lost, or a restoration not supported by the stone), with the reason | 65 |
 | Lost, as in Rothöhler's facsimile | 99 |
 | Rejected as not on the stone | 6 |
@@ -35,9 +35,9 @@ Each traced sign is also compared with Breasted's copy. In the viewer these comp
 
 | Status | Meaning | Signs |
 |---|---|---:|
-| confirmed | the stone agrees with Breasted | 1,321 |
-| corrected | the stone shows a different sign or form | 324 |
-| added | on the stone, but not in Breasted's copy | 247 |
+| confirmed | the stone agrees with Breasted | 1,320 |
+| corrected | the stone shows a different sign or form | 323 |
+| added | on the stone, but not in Breasted's copy | 249 |
 | not visible | in Breasted's copy, but not visible on the stone | 164 |
 
 The text is also read word by word: 603 words with transliteration and English gloss. These readings
@@ -55,7 +55,15 @@ are **provisional** (see [Limitations](#limitations)).
 **Photographs.** The main photograph was taken in the gallery and upscaled by the photographer. Two
 independent photographs, not upscaled, serve as a check. A relief map is computed from each source; it
 brings out the carved grooves. The relief from the independent photographs is used to reject strokes
-that appear only in the upscaled image and could be upscaling artefacts.
+that appear only in the upscaled image and could be upscaling artefacts. The photographer's original
+frame, before upscaling, survives in the upload history of the file; all strokes were scored again on it,
+and the scores agree closely with those on the upscaled image (medians 1.19 and 1.18, correlation 0.91).
+
+**Close-up.** A fourth photograph shows the top of columns 54–59 at roughly eight times the optical
+resolution of the main frame. It was registered to the main photograph (215 matched points, error
+1.3 px), and the 119 signs it covers were revised against it: 74 were kept, 28 adjusted or extended,
+8 retraced, 5 reduced, 2 emptied and 2 traced for the first time. The brief for this pass is
+[`docs/method/CLOSEUP_REVISION_TASK.md`](docs/method/CLOSEUP_REVISION_TASK.md).
 
 **Sign kits.** For every sign a kit is cut from these sources: the photograph, both relief maps, a
 coordinate grid with the neighbouring signs marked, a wider context view, and Rothöhler's drawing of the
@@ -83,8 +91,14 @@ sequence. Where a sign also has a number in Breasted's 1901 sequence, that numbe
   been peer reviewed.
 - All photographs were taken under the gallery's overhead light, which favours horizontal cuts. Some
   vertical strokes are therefore hard to see, and so are shallow cuts that face the light.
-- The main photograph was upscaled with AI. The independent relief maps limit the risk of tracing
-  upscaling artefacts but do not remove it.
+- The main photograph was upscaled with AI. The independent relief maps and the check against the
+  original frame limit the risk of tracing upscaling artefacts but do not remove it.
+- Reproducibility was measured on a random sample of 60 traced signs, each traced a second time by an
+  agent that could not see the first trace. Where both traced the same groove, the lines lie a median of
+  1.4 px apart. For 34 signs the two traces agree closely, and for 17 they agree in part. For 6 they
+  differ in substance, and for 3 the second tracer found nothing to trace. About one sign in seven is
+  therefore not reproducible from the present photographs. In the area of the close-up, 45 of 119 signs
+  changed once a sharper image was available; the rest of the stone has no such image yet.
 - The transliterations and glosses were drafted with reference to Breasted (1901), Bryant and Read
   (1901) and Sethe (1928). They have not yet been revised against the new sign list.
 - Open questions: a faint mark under the swallow in column 14 (`14.18`), which Rothöhler does not draw;
@@ -136,7 +150,7 @@ All coordinates are pixels of the full-resolution photograph (11,448 × 7,452).
 | File | Contents |
 |---|---|
 | `dataset/stone_full.json` | The complete edition: units (title, section, translation, words with transliteration, gloss and sign list) and signs with strokes and the tracer's notes |
-| `dataset/signlist_rothoehler.json` | The sign list in Rothöhler's sequence: per sign its number, 1901 alias, Gardiner code, his description, outcome (`traced`, `empty`, `lost`, `rejected`, `merged`) and box |
+| `dataset/signlist_rothoehler.json` | The sign list in Rothöhler's sequence: per sign its number (`rid`), 1901 `alias`, `gardiner` code, his description (`desc`), `status` (`traced`, `empty`, `lost`, `rejected`, `merged`), its box on the photograph (`box_full`) and on his plate (`plate_box`) |
 | `data/stone.json` | The viewer's subset of `stone_full.json` |
 | `data/breasted.json` | Breasted's copy as polygons |
 | `data/roth_copy.json` | Rothöhler's copy as polygons |
@@ -176,6 +190,9 @@ expect the working photographs and intermediate files, which are not part of thi
   (CC BY-SA 4.0) and
   [ShabakaStone-BritishMuseum-August19-08](https://commons.wikimedia.org/wiki/File:ShabakaStone-BritishMuseum-August19-08.jpg)
   (CC BY 2.5), Wikimedia Commons.
+- Close-up of columns 54–59:
+  [British_Museum_2024-10-03w](https://commons.wikimedia.org/wiki/File:British_Museum_2024-10-03w.jpg)
+  (CC BY-SA 4.0), Wikimedia Commons.
 - J. H. Breasted, "The Philosophy of a Memphite Priest", *Zeitschrift für Ägyptische Sprache und
   Altertumskunde* 39 (1901), 39–54, pls. I–II.
 - S. Bryant and F. W. Read, *Proceedings of the Society of Biblical Archaeology* 23 (1901), 160–187.

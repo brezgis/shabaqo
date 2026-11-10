@@ -5914,10 +5914,10 @@
     ],
     "box_src": "trace",
     "box_full": [
-     9122,
-     1136,
-     9170,
-     1171
+     9124,
+     1137,
+     9166,
+     1146
     ],
     "note": ""
    },
@@ -30680,9 +30680,9 @@
     "box_src": "trace",
     "box_full": [
      9036,
-     1412,
-     9079,
-     1492
+     1426,
+     9078,
+     1436
     ],
     "note": ""
    },
@@ -30706,10 +30706,10 @@
     ],
     "box_src": "trace",
     "box_full": [
-     9082,
-     1410,
-     9122,
-     1456
+     9116,
+     1432,
+     9155,
+     1438
     ],
     "note": ""
    },
@@ -30751,19 +30751,19 @@
     "alias": "54.4",
     "match": "relabel",
     "source": "roth",
-    "status": "traced",
+    "status": "empty",
     "plate_box": [
      5262,
      1072,
      5297,
      1080
     ],
-    "box_src": "trace",
+    "box_src": "1901",
     "box_full": [
-     9121,
-     1469,
-     9157,
-     1496
+     9120.7,
+     1467.3,
+     9157.3,
+     1496.3
     ],
     "note": "54.4 trace sits ~30 FULL px higher, on the lower right of the scarab; 1901 'small signs under right scarab' = this n"
    },
@@ -30814,10 +30814,10 @@
     ],
     "box_src": "trace",
     "box_full": [
-     9100,
-     1627,
-     9110,
-     1630
+     9128,
+     1562,
+     9151,
+     1590
     ],
     "note": "54.6 trace is a small fragment at the foot of this bird; the 1901 G26 box (54.10) is on his right owl"
    },
@@ -30895,10 +30895,10 @@
     ],
     "box_src": "trace",
     "box_full": [
-     9071,
-     1735,
-     9085,
-     1753
+     9021,
+     1759,
+     9083,
+     1823
     ],
     "note": "54.9 trace sits on the owl's head; untraced 1901 G17 box 54.8 overlaps its lower part"
    },
@@ -30922,10 +30922,10 @@
     ],
     "box_src": "trace",
     "box_full": [
-     9130,
-     1760,
-     9154,
-     1821
+     9090,
+     1761,
+     9155,
+     1826
     ],
     "note": "1901 G26; he draws an owl (jm.f), the ibis is higher (54.6)"
    },
@@ -30940,19 +30940,19 @@
     "alias": null,
     "match": "new",
     "source": "roth",
-    "status": "empty",
+    "status": "traced",
     "plate_box": [
      5222,
      1259,
      5261,
      1273
     ],
-    "box_src": "roth_mapped",
+    "box_src": "trace",
     "box_full": [
-     9029,
-     1834,
-     9091,
-     1858
+     9013,
+     1832,
+     9086,
+     1876
     ],
     "note": "no project sid"
    },
@@ -30976,10 +30976,10 @@
     ],
     "box_src": "trace",
     "box_full": [
-     9148,
-     1849,
-     9158,
-     1858
+     9086,
+     1829,
+     9146,
+     1876
     ],
     "note": ""
    },
@@ -31003,9 +31003,9 @@
     ],
     "box_src": "trace",
     "box_full": [
-     9069,
+     9048,
      1897,
-     9096,
+     9104,
      1974
     ],
     "note": ""
@@ -31021,19 +31021,19 @@
     "alias": "54.13",
     "match": "same",
     "source": "roth",
-    "status": "traced",
+    "status": "empty",
     "plate_box": [
      5228,
      1368,
      5247,
      1444
     ],
-    "box_src": "trace",
+    "box_src": "1901",
     "box_full": [
-     9061,
-     2034,
-     9066,
-     2066
+     9060,
+     2033,
+     9067,
+     2067
     ],
     "note": ""
    },
@@ -31084,10 +31084,10 @@
     ],
     "box_src": "trace",
     "box_full": [
-     9105,
+     9101,
      2155,
      9138,
-     2163
+     2166
     ],
     "note": ""
    },
@@ -31114,7 +31114,7 @@
      9052,
      2169,
      9109,
-     2266
+     2241
     ],
     "note": ""
    },
@@ -32790,10 +32790,10 @@
     ],
     "box_src": "trace",
     "box_full": [
-     9209,
+     9208,
      1444,
-     9242,
-     1453
+     9246,
+     1456
     ],
     "note": ""
    },
@@ -33011,7 +33011,7 @@
     "box_full": [
      9211,
      1812,
-     9272,
+     9287,
      1827
     ],
     "note": ""
@@ -33038,7 +33038,7 @@
     "box_full": [
      9186,
      1867,
-     9300,
+     9304,
      1953
     ],
     "note": ""
@@ -33117,10 +33117,10 @@
     ],
     "box_src": "trace",
     "box_full": [
-     9190,
-     2070,
-     9208,
-     2071
+     9235,
+     2031,
+     9290,
+     2095
     ],
     "note": ""
    },
@@ -33171,10 +33171,10 @@
     ],
     "box_src": "trace",
     "box_full": [
-     9171,
-     2099,
-     9187,
-     2103
+     9189,
+     2067,
+     9209,
+     2110
     ],
     "note": ""
    },
@@ -33228,7 +33228,7 @@
      9181,
      2140,
      9218,
-     2148
+     2151
     ],
     "note": "1901 D46 'hand expected'; trace is a small arc"
    },
@@ -33309,7 +33309,7 @@
      9240,
      2200,
      9288,
-     2246
+     2264
     ],
     "note": "55.17 trace = its diagonal back"
    },
@@ -35334,7 +35334,7 @@
      9380,
      1449,
      9412,
-     1475
+     1474
     ],
     "note": ""
    },
@@ -35604,7 +35604,7 @@
      9357,
      1818,
      9477,
-     1834
+     1835
     ],
     "note": ""
    },
@@ -35628,10 +35628,10 @@
     ],
     "box_src": "trace",
     "box_full": [
-     9371,
-     1860,
+     9347,
+     1862,
      9470,
-     1879
+     1880
     ],
     "note": ""
    },
@@ -35898,7 +35898,7 @@
     ],
     "box_src": "trace",
     "box_full": [
-     9333,
+     9334,
      2251,
      9399,
      2336
@@ -35953,8 +35953,8 @@
     "box_src": "trace",
     "box_full": [
      9408,
-     2256,
-     9463,
+     2258,
+     9462,
      2295
     ],
     "note": "project '?'; its lens-with-dot is this mace head"
@@ -35982,7 +35982,7 @@
      9355,
      2367,
      9429,
-     2480
+     2481
     ],
     "note": "project '?' (same sign, no code)"
    },
@@ -37954,7 +37954,7 @@
     "box_full": [
      9518,
      1582,
-     9596,
+     9610,
      1692
     ],
     "note": ""
@@ -37997,19 +37997,19 @@
     "alias": null,
     "match": "new",
     "source": "roth",
-    "status": "empty",
+    "status": "traced",
     "plate_box": [
      5551,
      1108,
      5562,
      1162
     ],
-    "box_src": "roth_mapped",
+    "box_src": "trace",
     "box_full": [
-     9610,
-     1589,
-     9640,
-     1682
+     9614,
+     1591,
+     9617,
+     1650
     ],
     "note": "no project sid"
    },
@@ -38033,10 +38033,10 @@
     ],
     "box_src": "trace",
     "box_full": [
-     9515,
+     9512,
      1711,
      9611,
-     1760
+     1785
     ],
     "note": "no project sid (57.3's 1901 box lies on its upright)"
    },
@@ -38088,8 +38088,8 @@
     "box_src": "trace",
     "box_full": [
      9506,
-     1786,
-     9582,
+     1790,
+     9588,
      1858
     ],
     "note": ""
@@ -38385,9 +38385,9 @@
     "box_src": "trace",
     "box_full": [
      9567,
-     2359,
+     2311,
      9591,
-     2364
+     2374
     ],
     "note": "project F20 (uncertain on the stone)"
    },
@@ -38438,10 +38438,10 @@
     ],
     "box_src": "trace",
     "box_full": [
-     9548,
-     2395,
+     9550,
+     2397,
      9586,
-     2444
+     2443
     ],
     "note": "project '?'"
    },
@@ -40681,10 +40681,10 @@
     ],
     "box_src": "trace",
     "box_full": [
-     9705,
+     9706,
      1667,
      9755,
-     1696
+     1695
     ],
     "note": ""
    },
@@ -40757,8 +40757,8 @@
     ],
     "box_src": "trace",
     "box_full": [
-     9723,
-     1787,
+     9722,
+     1784,
      9773,
      1805
     ],
@@ -40892,7 +40892,7 @@
     ],
     "box_src": "trace",
     "box_full": [
-     9655,
+     9656,
      1990,
      9733,
      2089
@@ -40947,8 +40947,8 @@
     "box_src": "trace",
     "box_full": [
      9662,
-     2112,
-     9772,
+     2114,
+     9765,
      2146
     ],
     "note": "drawn as a snake with raised head like n=11, not an arm D36 (Sethe: ꜥ corrupt for ḏ of wḏ)"
